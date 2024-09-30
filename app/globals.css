@@ -80,11 +80,11 @@
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-2xl text-foreground;
   }
 
   .title {
-    @apply font-serif text-3xl font-bold underline decoration-border/75 decoration-2 underline-offset-8;
+    @apply tracking-med font-serif text-3xl underline decoration-border/75 decoration-2 underline-offset-8;
   }
 
   .prose pre {

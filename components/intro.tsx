@@ -9,9 +9,9 @@ export default function Intro() {
           Hey, I&#39;m Mary. Great to meet you.
         </h2>
         <p className='mt-3 font-light text-muted-foreground'>
-          I&#39;m a software engineer based in Toronto, Canada. I&#39;m
-          passionate about learning new technologies and sharing knowledge with
-          others.
+          I&#39;m a frontend engineer and ux designer based in San Francisco,
+          CA. I&#39;m passionate about learning new technologies and making
+          things look beautiful.
         </p>
       </div>
       <div className='relative'>
