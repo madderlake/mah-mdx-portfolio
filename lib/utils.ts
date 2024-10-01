@@ -12,3 +12,5 @@ export function formatDate(date: string) {
     year: 'numeric'
   })
 }
+
+export const supportedImages = ['.jpeg', '.png', '.webp', '.jpg']
