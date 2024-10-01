@@ -44,15 +44,6 @@ export default async function Project({
 
         {image && (
           <div className='h-w-full relative mb-6 h-96 overflow-hidden rounded-lg'>
-            {!isSupported && (
-              <img
-                src={image}
-                alt={title || ''}
-                className='object-contain'
-                width={imageData?.width}
-                height={imageData?.height}
-              />
-            )}
             <Image
               src={image}
               alt={title || ''}
