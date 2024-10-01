@@ -76,6 +76,12 @@ const config = {
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out'
+      },
+      grayscale: {
+        90: '90%'
+      },
+      letterSpacing: {
+        med: '.015em'
       }
     }
   },

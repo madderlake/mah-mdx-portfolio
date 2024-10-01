@@ -27,7 +27,7 @@ export default async function Project({
   }
 
   const { metadata, content } = project
-  const { title, image, author, publishedAt } = metadata
+  const { title, image, imageData, author, publishedAt } = metadata
 
   return (
     <section className='pb-24 pt-32'>
@@ -41,12 +41,15 @@ export default async function Project({
         </Link>
 
         {image && (
-          <div className='relative mb-6 h-96 w-full overflow-hidden rounded-lg'>
+          <div className='h-w-full relative mb-6 h-96 overflow-hidden rounded-lg'>
             <Image
               src={image}
               alt={title || ''}
-              className='object-cover'
-              fill
+              className='object-contain'
+              width={imageData?.width}
+              height={imageData?.height}
+              fill={imageData === undefined}
+              priority
             />
           </div>
         )}
@@ -58,7 +61,7 @@ export default async function Project({
           </p>
         </header>
 
-        <main className='prose mt-16 dark:prose-invert'>
+        <main className='prose mt-16 text-lg dark:prose-invert'>
           <MDXContent source={content} />
         </main>
       </div>
