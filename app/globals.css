@@ -96,7 +96,9 @@
     @apply before:content-none !important;
     @apply after:content-none !important;
   }
-
+  .prose.project {
+    @apply max-w-4xl;
+  }
   .prose pre code {
     @apply p-0;
     line-height: 1.75;

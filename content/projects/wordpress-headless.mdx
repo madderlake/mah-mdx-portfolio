@@ -8,17 +8,21 @@
 ---
 
 Headless WordPress / NextJS Theme I have been a fan of the headless CMS since it
-first became a "thing", and using WordPress was especially intriguing. For many
-years, and on countless WordPress sites, I have managed and updated an exploding
-number of plugins, themes, and files, ever watchful for potential security
-vulnerabilities.
+first became a "thing", and built a headless theme years ago with Express
+Server. That theme enabled custom page templates and I wanted to replicate that
+functionality.
 
-I have always seen WordPress as a platform, probably because I have used it for
-sites, and not exclusively for blogging. When stripped of the functionality that
-delivers the content to the browser, you are left with a pretty lean, mean
-content entry and delivery machine.
+On countless WordPress sites, I have managed and updated an exploding number of
+plugins, themes, and files, ever watchful for potential security
+vulnerabilities. Older sites can be challenging to update and maintain.
 
-All this is in addition to the burgeoning popularity of libraries like React and
+WordPress has always been a platform to me, probably because I have used it
+predominantly for sites rather than for blogging. Without using the
+functionality that delivers the user interface to the browser (and all the
+security risks therein), what remains a lean, mean content-entry and delivery
+machine, with unmatched flexibility.
+
+All coincides with the burgeoning popularity of libraries like React and
 statically generated sites, not to mention the increasing need for optimization,
 performance, and security.
 
@@ -32,34 +36,44 @@ create-next-app.
 
 ### My Requirements
 
-- Built from scratch
+- Built it from scratch
 
-- Boilerplate - minimal styles - customizable
+- Keep it boilerplate - minimal styles - customizable
 
-- ACF Page Templates - integrate Flexible content page Templates
+- Integrate Flexible content ACF page Templates
 
-- TailwindCSS - explore this utility-first style system for the first time
+- TailwindCSS - utilize this utility-first style system for the first time
 
-- Blog and Archive pages that allow introductory content
+- Archive pages that allow page data
 
-### Headless with ACF
+### Process
 
-For a previous headless theme, I had converted an ACF (Advanced Custom Fields)
-template to React, along with several layout components - tabs, columns, and
-cards. I wanted to include this page template in my headless theme, and load it
-conditionally.
+I was excited to take a deep dive into the new features in NextJS 14, which
+introduces the `app router` and server component.
 
-I was excited to take a deep dive into server components - included with Next as
-of v13. It's a huge shift that moves React into fullstack territory.
+[Post: Server Components 101](/posts/react-server-components)
 
-[Blog: Server Components 101](/posts/react-server-components)
+For the ACF page templates, I was able to leverage them from my old project,
+along with all the layouts - sections, tabs, columns, and cards.
 
-### Challenges & Gotchas
+Leaving the posts page setting unset in WordPress, I created the Blog page with
+some introductory content. Then, inside the Blog page template, I fetched the
+posts. I had done this in WordPress in PHP by implementing the `WP_Loop` after
+the page content. Unfortunately, in Next this generated 500 errors on
+deploy/build/serve. I believe this was caused by the nested data fetching
+occuring on a page earmarked to be statically rendered. This was solved by using
+Next's `const dyamic = 'force-dynamic'` setting.
 
-- setting up Types for GraphQL data (nodes and edges)
-- composing the `GraphQL query` to get all the ACF data
-- 500 errors resulting from nested data fetching for the statically rendered
-  pages.
+### Tech Stack
+
+- **WordPress**
+- **Docker** - for local development
+- **NextJS** v14+
+- **Typescript**
+- **GraphQL**
+- **TailwindCSS**
+- `@tailwindcss/typography` - adds styles for generated content
+- `image-size` - gets image sizes from files
 
 ### Repository & Further Detail
 
