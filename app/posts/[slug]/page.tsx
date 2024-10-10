@@ -28,7 +28,7 @@ export default async function Post({ params }: { params: { slug: string } }) {
 
   return (
     <section className='pb-24 pt-20'>
-      <div className='container max-w-3xl bg-white'>
+      <div className='container max-w-4xl bg-white py-10'>
         <Link
           href='/posts'
           className='mb-8 inline-flex items-center gap-2 text-sm font-light text-muted-foreground transition-colors hover:text-foreground'

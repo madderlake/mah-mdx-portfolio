@@ -32,8 +32,8 @@ export default async function Project({
   const isSupported =
     imageData?.type !== undefined && supportedImages.includes(imageData?.type)
   return (
-    <section className='pb-24 pt-32'>
-      <div className='container max-w-3xl'>
+    <section className='pb-24 pt-20'>
+      <div className='container max-w-4xl bg-white py-10'>
         <Link
           href='/projects'
           className='mb-8 inline-flex items-center gap-2 text-sm font-light text-muted-foreground transition-colors hover:text-foreground'
@@ -47,11 +47,8 @@ export default async function Project({
             <Image
               src={image}
               alt={title || ''}
-              className='object-contain'
-              width={imageData?.width}
-              height={imageData?.height}
-              fill={imageData === undefined}
-              unoptimized={!isSupported}
+              className='object-cover'
+              fill
               priority
             />
           </div>
@@ -64,9 +61,9 @@ export default async function Project({
           </p>
         </header>
 
-        <main className='prose mt-16 text-lg dark:prose-invert'>
+        <div className='project prose mt-10 text-lg dark:prose-invert'>
           <MDXContent source={content} />
-        </main>
+        </div>
       </div>
     </section>
   )
