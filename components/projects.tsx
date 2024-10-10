@@ -13,23 +13,18 @@ export default function Projects({
     <ul className='grid grid-cols-1 gap-8 sm:grid-cols-2'>
       {projects.map(project => {
         const { image, thumb, slug, title, imageData, thumbData } = project
-        const imgData = thumbData !== null ? thumbData : imageData
-        const aspectRatio = (imgData && imgData?.width / imgData?.height) || 1
-        const isFillRatio: boolean = aspectRatio > 1.4
+
         return (
           <li key={slug} className='group relative'>
             <Link href={`/projects/${slug}`}>
               {project.image && (
-                <div className='h-72 bg-muted sm:h-60'>
+                <div className='h-72 bg-muted sm:h-72'>
                   <div className='h-full w-full overflow-clip rounded-md'>
                     <Image
                       src={thumb ?? (image as string)}
                       alt={title || ''}
-                      // width={!isFillRatio ? imgData?.width : undefined}
-                      // height={!isFillRatio ? imgData?.height : undefined}
-                      // fill={imgData === undefined || isFillRatio}
                       fill
-                      className='grayscale-90 rounded-md object-cover object-top transition-transform duration-500 group-hover:scale-105 group-hover:grayscale-0'
+                      className='rounded-md object-cover object-top grayscale transition-transform duration-500 group-hover:scale-105 group-hover:grayscale-0'
                     />
                   </div>
                 </div>
