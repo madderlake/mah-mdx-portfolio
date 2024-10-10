@@ -1,0 +1,247 @@
+---
+  title: Local WordPress Development with Docker
+  summary: Develop with ease using Docker.
+  image: /images/posts/introduction-to-mdx.webp
+  author: 'Mary A. Hayne'
+  publishedAt: '2024-03-02'
+---
+
+Setting up a local WordPress development environment with Docker is an excellent
+way to streamline your workflow - and save space on your hard drive!
+
+If you've ever struggled with XXAMP, MAMP, or trying to re-configure PHP and
+Apache on your Mac after a new release of Mac OS, you know there has to be a
+better way.
+
+Docker helps you avoid system dependency issues and ensures a consistent
+development environment.
+
+This guide will walk you through setting up a basic WordPress development
+environment using Docker Desktop and `docker-compose`.
+
+### Prerequisites
+
+- Docker Desktop installed on your system
+- Docker Compose installed
+- Basic knowledge of Docker and WordPress
+
+#### Step 1: Create a Project Directory
+
+Start by creating a directory for your WordPress project:
+
+```bash
+
+mkdir wordpress-docker cd wordpress-docker
+
+```
+
+#### Step 2: Create an .env File In your project root directory, create a new file called
+
+```bash
+touch .env
+
+```
+
+Open the file and define the variables you'll need to access WordPress and
+MySQL.
+
+Example `.env` file:
+
+```yaml
+# MySQL configuration
+
+MYSQL_ROOT_PASSWORD=example MYSQL_DATABASE=wordpress MYSQL_USER=root
+MYSQL_PASSWORD=example
+
+# WordPress configuration
+
+WORDPRESS_DB_HOST=db:3306 WORDPRESS_DB_USER=root WORDPRESS_DB_PASSWORD=example
+WORDPRESS_DB_NAME=wordpress
+
+```
+
+### Step 3: Create `docker-compose.yml`
+
+The heart of the Docker setup is the `docker-compose.yml` file, which defines
+the services for WordPress, MySQL, and phpMyAdmin.
+
+Create that file inside your project directory:
+
+```bash
+
+touch docker-compose.yml
+
+```
+
+Example `docker-compose.yml`:
+
+```yaml
+services:
+  database:
+    # Use a mariadb image which supports both amd64 & arm64 architecture
+    image: mariadb:10.6.4-focal
+    restart: unless-stopped
+    ports:
+      - 3309:3306
+    env_file: .env
+    environment:
+      MYSQL_ROOT_PASSWORD: '${MYSQL_ROOT_PASSWORD}'
+      MYSQL_DATABASE: '${MYSQL_DATABASE}'
+      MYSQL_USER: '${MYSQL_USER}'
+      MYSQL_PASSWORD: '${MYSQL_PASSWORD}'
+    volumes:
+      - db-data:/var/lib/mysql
+    networks:
+      - wordpress-network
+    deploy:
+      resources:
+        limits:
+          memory: 2048m
+
+  phpmyadmin:
+    depends_on:
+      - database
+    image: phpmyadmin/phpmyadmin
+    restart: unless-stopped
+    ports:
+      - 8006:80
+    env_file: .env
+    environment:
+      PMA_HOST: database
+      MYSQL_ROOT_PASSWORD: '${MYSQL_ROOT_PASSWORD}'
+    networks:
+      - wordpress-network
+
+  wordpress:
+    depends_on:
+      - database
+    image: wordpress:6.6.1-apache
+    restart: unless-stopped
+    ports:
+      - 8086:80
+    env_file: .env
+    environment:
+      WORDPRESS_DB_HOST: database
+      WORDPRESS_DB_NAME: '${MYSQL_DATABASE}'
+      WORDPRESS_DB_USER: '${MYSQL_USER}'
+      WORDPRESS_DB_PASSWORD: '${MYSQL_PASSWORD}'
+    volumes:
+      - ./wp-content:/var/www/html/wp-content
+
+    networks:
+      - wordpress-network
+
+  volumes:
+    db-data:
+```
+
+### Breakdown of `docker-compose.yml`
+
+- **wordpress**: This is the WordPress container that uses the latest WordPress
+  image from Docker Hub. We expose port `8080` for local access.
+
+- **db**: This service runs a MariaDB container, defining environment variables
+  for database access.
+
+- **phpmyadmin**: phpMyAdmin is included for easier database management. Here it
+  will run on port `8081`.
+
+- **volumes**: this is where local directories are mapped to the files in the
+  container. In this case we are mapping to the only folder we'll need to
+  modify - `wp-content`
+
+This directory needs to be inside the same folder as the `docker-compose.yml`
+
+### Step 3: Create the Required Directories
+
+You will need a local directory to hold WordPress files. This will sync with the
+WordPress container so that you can make edits on your local machine.
+
+```bash
+
+mkdir wordpress
+
+```
+
+### Step 4: Start the Containers
+
+With your `docker-compose.yml` file and project directories in place, you’re
+ready to spin up the containers:
+
+```bash
+
+docker-compose up -d
+
+```
+
+This command runs the containers in the background (`-d` flag for detached
+mode). Docker will pull the necessary images, set up the containers, and start
+WordPress, MySQL, and phpMyAdmin.
+
+### Step 5: Access WordPress and phpMyAdmin
+
+Once the containers are up, you can access your local WordPress installation by
+navigating to:
+
+- WordPress: http://localhost:8080
+- phpMyAdmin: http://localhost:8081 (logging with `root` / `example`)
+
+### Step 6: Manage WordPress Files
+
+Since the `wordpress` directory is mounted inside the container as a volume, any
+changes you make to the files inside this directory will be reflected
+immediately in the running WordPress instance.
+
+You can edit the WordPress themes, plugins, or core files directly.
+
+For example, if you’re developing a custom theme, you can create a theme
+directory:
+
+```bash
+
+mkdir -p wordpress/wp-content/themes/my-custom-theme
+
+```
+
+And start building your theme inside `my-custom-theme`.
+
+### Step 7: Stop and Remove Containers
+
+When you’re done with your development session, you can stop the containers
+with:
+
+```bash
+
+docker-compose down
+
+```
+
+This will stop and remove the containers, but your data (like the WordPress
+database) will be preserved because it is stored in a Docker volume (`db_data`).
+
+If you want to clean up everything, including the data, you can run:
+
+```bash
+
+docker-compose down -v
+
+```
+
+This will remove the containers and the associated volumes.
+
+### Troubleshooting
+
+- **Cannot connect to MySQL**: Ensure that the environment variables in the
+  `docker-compose.yml` for both WordPress and MySQL are correctly aligned.
+- **Port conflicts**: If port `8080` or `8081` is already in use, change the
+  ports in the `docker-compose.yml` file.
+
+### Conclusion
+
+You now have a fully functional local WordPress development environment using
+Docker! With `docker-compose`, it's easy to start and stop your environment,
+ensuring that your development setup is reproducible and isolated. You can
+expand this setup by adding more services, such as Redis or Elasticsearch, as
+your project grows.
+
+Happy coding!

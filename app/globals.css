@@ -84,7 +84,7 @@
   }
 
   .title {
-    @apply tracking-med font-serif text-3xl underline decoration-border/75 decoration-2 underline-offset-8;
+    @apply font-serif text-3xl tracking-med underline decoration-border/75 decoration-2 underline-offset-8;
   }
 
   .prose pre {
@@ -93,6 +93,8 @@
 
   .prose code {
     @apply rounded-lg px-1 py-0.5;
+    @apply before:content-none !important;
+    @apply after:content-none !important;
   }
 
   .prose pre code {
@@ -100,7 +102,24 @@
     line-height: 1.75;
   }
 
-  .prose code span {
+  .prose p code span,
+  h3 code span,
+  li code span {
     @apply font-medium;
+    @apply text-red-500 !important;
+  }
+
+  body > main:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.25;
+    z-index: -1;
+    background: url('/images/leaf-background.png');
+    background-size: contain;
+    filter: grayscale();
   }
 }

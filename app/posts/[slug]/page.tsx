@@ -27,8 +27,8 @@ export default async function Post({ params }: { params: { slug: string } }) {
   const { title, image, author, publishedAt } = metadata
 
   return (
-    <section className='pb-24 pt-32'>
-      <div className='container max-w-3xl'>
+    <section className='pb-24 pt-20'>
+      <div className='container max-w-3xl bg-white'>
         <Link
           href='/posts'
           className='mb-8 inline-flex items-center gap-2 text-sm font-light text-muted-foreground transition-colors hover:text-foreground'

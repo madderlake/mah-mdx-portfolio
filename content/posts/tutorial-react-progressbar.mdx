@@ -1,0 +1,187 @@
+---
+  title: Build a Progressbar in React
+  summary: How to build a progressbar component in React.
+  image: /images/posts/introduction-to-mdx.webp
+  author: 'Mary A. Hayne'
+  publishedAt: '2024-08-10'
+---
+
+## Building a Progress Bar Component in React
+
+Let's walk through how to build a simple, reusable ProgressBar component using
+React. The component will visually represent a progress value between 0 and 100%
+and will handle out-of-range values by clamping them to the nearest valid value.
+
+### Prerequisites
+
+First, ensure you have the following set up:
+
+**Node.js**: Download and install Node.js from nodejs.org.<br/> **React**: Basic
+understanding of React components and props.<br/> **Text Editor**: A code editor
+like Visual Studio Code.
+
+### Step 1: Set Up the Project Create a new React project:
+
+If you don't have a React project already, you can create one using Create React
+App by running the following commands in your terminal:
+
+```bash
+npx create-react-app progress-bar-example cd progress-bar-example
+```
+
+Navigate to the source folder: Inside your project directory, go to the src
+folder where you'll add your ProgressBar component.
+
+```bash
+cd src
+```
+
+### Step 2: Create the ProgressBar Component
+
+#### Create a new file for the ProgressBar component
+
+create a file named `ProgressBar.js` inside the src directory:
+
+```bash copy code
+touch ProgressBar.js
+```
+
+#### Implement the ProgressBar component:
+
+Open `ProgressBar.js` in your code editor and add the following code:
+
+```javascript
+const MIN = 0
+const MAX = 100
+const MIN = 0
+const MAX = 100
+```
+
+```javascript
+export default function ProgressBar({ value }) {
+  // Handle invalid values and convert them to be within [0, 100].
+  const clampedValue = Math.min(Math.max(value, MIN), MAX)
+
+  return (
+    <div className='progress'>
+      {' '}
+      <div
+        className='progress-bar'
+        style={{ width: `${clampedValue}%` }}
+        role='progressbar'
+        aria-valuenow={clampedValue}
+        aria-valuemin={MIN}
+        aria-valuemax={MAX}
+      >
+        {clampedValue}%{' '}
+      </div>{' '}
+    </div>
+  )
+}
+```
+
+Here's what each part of the code does:
+
+- **MIN and MAX constants**: Define the minimum and maximum values for the
+  progress bar (0% and 100%, respectively).
+
+- **clampedValue**: Ensures the value prop is clamped between 0 and 100. If the
+  value is less than MIN, it's set to MIN. If it's greater than MAX, it's set to
+  MAX.
+- **JSX structure**: The ProgressBar component returns a div with a nested div
+  styled according to the clamped progress value.
+- **Aria attributes**: The role and aria attributes ensure accessibility.
+
+### Step 3: Styling the ProgressBar
+
+Add some basic styles to your ProgressBar component to make it visually
+appealing. You can do this in a new ProgressBar.css file:
+
+```bash
+touch ProgressBar.css
+```
+
+Open ProgressBar.css and add the following CSS:
+
+```css
+.progress {
+  background-color: #e0e0e0;
+  border-radius: 10px;
+  overflow: hidden;
+  height: 20px;
+  width: 100%;
+}
+
+.progress-bar {
+  background-color: #76c7c0;
+  height: 100%;
+  transition: width 0.4s ease;
+}
+
+/* -- notes
+.progress: Styles the container with a light gray background and rounded corners.
+.progress-bar: Styles the inner bar with a custom color and smooth
+transition effect as it changes width.*/
+```
+
+#### Import the CSS into your ProgressBar component:
+
+Modify the ProgressBar.js file to import the CSS file:
+
+```javascript
+import './ProgressBar.css'
+```
+
+### Step 4: Use the ProgressBar Component
+
+Open App.js in the src directory, and replace the default content with code that
+uses your ProgressBar component:
+
+```javascript
+import React, { useState } from 'react'
+import ProgressBar from './ProgressBar'
+
+function App() {
+  const [value, setValue] = useState(50)
+
+  return (
+    <div className='App'>
+      {' '}
+      <h1>React Progress Bar Example</h1>
+      <ProgressBar value={value} />{' '}
+      <input
+        type='range'
+        min='0'
+        max='100'
+        value={value}
+        onChange={e => setValue(Number(e.target.value))}
+      />{' '}
+    </div>
+  )
+}
+
+export default App
+```
+
+- **useState Hook**: Manages the state of the progress value.
+- **input range slider**: Allows you to dynamically update the progress value
+  and see the progress bar adjust in real time.
+
+### Step 5: Run Your Application
+
+Start the development server to see your progress bar in action:
+
+```bash
+npm start
+```
+
+Open the application: Visit `http://localhost:3000` in your web browser. You
+should see a simple progress bar that updates its value as you move the range
+slider.
+
+### Conclusion
+
+You’ve successfully built a reusable and responsive ProgressBar component in
+React! This component is now ready to be integrated into any part of your
+application where a progress indication is needed. Feel free to customize the
+styles or enhance its functionality as needed.
