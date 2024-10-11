@@ -45,7 +45,7 @@ export default async function Project({
             <Image
               src={image}
               alt={title || ''}
-              className='object-cover'
+              className='!absolute !bottom-auto !right-auto !h-auto'
               fill
               priority
             />
