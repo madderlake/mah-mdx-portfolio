@@ -28,7 +28,7 @@ export default async function Post({ params }: { params: { slug: string } }) {
 
   return (
     <section className='pb-24 pt-20'>
-      <div className='container max-w-4xl bg-white py-10'>
+      <div className='container max-w-4xl bg-white bg-white/75 py-10'>
         <Link
           href='/posts'
           className='mb-8 inline-flex items-center gap-2 text-sm font-light text-muted-foreground transition-colors hover:text-foreground'
@@ -42,7 +42,7 @@ export default async function Post({ params }: { params: { slug: string } }) {
             <Image
               src={image}
               alt={title || ''}
-              className='object-cover'
+              className='absolute bottom-auto right-auto h-auto'
               fill
             />
           </div>

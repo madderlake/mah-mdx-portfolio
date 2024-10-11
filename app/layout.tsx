@@ -28,11 +28,7 @@ export const metadata: Metadata = {
   title: 'Mary A Hayne - Portfolio',
   description: 'Created with NextJS and MDX'
 }
-export const styles = {
-  backgroundImage: "url('/images/leaf-background.png')",
 
-  backgroundColor: 'transparent'
-}
 export default function RootLayout({
   children
 }: Readonly<{
@@ -41,7 +37,6 @@ export default function RootLayout({
   return (
     <html lang='en' suppressHydrationWarning>
       <body
-        // style={styles}
         className={cn(
           'flex min-h-screen flex-col font-sans antialiased',
           proxima.variable,
