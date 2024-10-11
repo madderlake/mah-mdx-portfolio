@@ -6,7 +6,6 @@ import MDXContent from '@/components/mdx-content'
 import { ArrowLeftIcon } from '@radix-ui/react-icons'
 import { getProjectBySlug, getProjects } from '@/lib/projects'
 import { notFound } from 'next/navigation'
-import { supportedImages } from '@/lib/utils'
 
 export async function generateStaticParams() {
   const projects = await getProjects()
@@ -28,12 +27,11 @@ export default async function Project({
   }
 
   const { metadata, content } = project
-  const { title, image, imageData, author, publishedAt } = metadata
-  const isSupported =
-    imageData?.type !== undefined && supportedImages.includes(imageData?.type)
+  const { title, image, author, publishedAt } = metadata
+
   return (
     <section className='pb-24 pt-20'>
-      <div className='container max-w-4xl bg-white py-10'>
+      <div className='container max-w-4xl bg-white bg-white/75 py-10'>
         <Link
           href='/projects'
           className='mb-8 inline-flex items-center gap-2 text-sm font-light text-muted-foreground transition-colors hover:text-foreground'

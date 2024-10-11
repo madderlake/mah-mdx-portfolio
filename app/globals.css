@@ -122,6 +122,7 @@
     z-index: -1;
     background: url('/images/leaf-background.png');
     background-size: contain;
+    background-repeat: round space;
     filter: grayscale();
   }
 }
