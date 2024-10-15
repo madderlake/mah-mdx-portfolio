@@ -11,25 +11,34 @@ export type Project = {
   content: string
 }
 
+export type ProjectImage = {
+  image: string
+}
+
+export type ProjectThumb = {
+  thumb: string
+}
 export type ProjectMetadata = {
   title?: string
   summary?: string
-  image?: string
-  thumb?: string
   thumbData?: {
+    src: string
     width: number
     height: number
     type?: string
   } | null
   imageData?: {
+    src: string
     width: number
     height: number
     type?: string
-  }
+  } | null
   author?: string
   publishedAt?: string
   slug: string
 }
+
+export type ProjectInfo = Omit<ProjectMetadata, 'image'>
 
 export async function getProjectBySlug(slug: string): Promise<Project | null> {
   try {
@@ -69,12 +78,26 @@ export function getImageSize(filepath: string): ProjectMetadata['imageData'] {
   return dimensions
 }
 
-export function getProjectMetadata(filepath: string): ProjectMetadata {
+export function getProjectMetadata(filepath: string): ProjectInfo {
   const slug = filepath.replace(/\.mdx$/, '')
   const filePath = path.join(rootDirectory, filepath)
   const fileContent = fs.readFileSync(filePath, { encoding: 'utf8' })
   const { data } = matter(fileContent)
-  const imageData = getImageSize(data.image)
-  const thumbData = data.thumb !== undefined ? getImageSize(data.thumb) : null
+  const { image, thumb } = data
+  const imageSize = image && getImageSize(image)
+  const thumbSize = thumb && getImageSize(thumb)
+
+  const imageData = {
+    src: image,
+    width: imageSize?.width as number,
+    height: imageSize?.height,
+    type: imageSize?.type
+  }
+  const thumbData = {
+    src: thumb,
+    width: thumbSize?.width,
+    height: thumbSize?.height,
+    type: thumbSize?.type
+  }
   return { ...data, slug, thumbData, imageData }
 }
