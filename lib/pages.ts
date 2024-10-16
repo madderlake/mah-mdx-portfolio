@@ -38,15 +38,15 @@ export async function getPageBySlug(slug: string): Promise<PageData | null> {
     const filePath = path.join(rootDirectory, `${slug}.mdx`)
     const fileContent = fs.readFileSync(filePath, { encoding: 'utf8' })
     const { data, content } = matter(fileContent)
-    const imageData = getImageSize(data.image)
-    const thumbData = data.thumb !== undefined ? getImageSize(data.thumb) : null
+    const imageData = getImageData(data.image)
+    const thumbData = data.thumb !== undefined ? getImageData(data.thumb) : null
     return { metadata: { ...data, slug, thumbData, imageData }, content }
   } catch (error) {
     return null
   }
 }
 
-export function getImageSize(filepath: string): PageMetadata['imageData'] {
+export function getImageData(filepath: string): PageMetadata['imageData'] {
   const imagePath = path.join(imageDirectory, filepath)
   const dimensions = sizeOf(imagePath)
   return dimensions
@@ -57,7 +57,7 @@ export function getPageMetadata(filepath: string): PageMetadata {
   const filePath = path.join(rootDirectory, filepath)
   const fileContent = fs.readFileSync(filePath, { encoding: 'utf8' })
   const { data } = matter(fileContent)
-  const imageData = getImageSize(data.image)
-  const thumbData = data.thumb !== undefined ? getImageSize(data.thumb) : null
+  const imageData = getImageData(data.image)
+  const thumbData = data.thumb !== undefined ? getImageData(data.thumb) : null
   return { ...data, slug, thumbData, imageData }
 }

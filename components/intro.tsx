@@ -1,9 +1,9 @@
 import Image from 'next/image'
-import { getImageSize } from '@/lib/projects'
+import { getImageData } from '@/lib/projects'
 
 export default function Intro() {
   const authorImage = '/images/authors/maryahayne-sq.jpg'
-  const imageData = getImageSize(authorImage)
+  const imageData = getImageData(authorImage)
 
   return (
     <section className='flex flex-col-reverse items-start gap-x-8 gap-y-4 pb-24 pr-16 md:flex-row md:items-center'>
