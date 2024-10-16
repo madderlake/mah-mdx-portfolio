@@ -11,13 +11,6 @@ export type Project = {
   content: string
 }
 
-export type ProjectImage = {
-  image: string
-}
-
-export type ProjectThumb = {
-  thumb: string
-}
 export type ProjectMetadata = {
   title?: string
   summary?: string
@@ -37,8 +30,6 @@ export type ProjectMetadata = {
   publishedAt?: string
   slug: string
 }
-
-export type ProjectInfo = Omit<ProjectMetadata, 'image'>
 
 export async function getProjectBySlug(slug: string): Promise<Project | null> {
   try {
@@ -78,7 +69,7 @@ export function getImageSize(filepath: string): ProjectMetadata['imageData'] {
   return dimensions
 }
 
-export function getProjectMetadata(filepath: string): ProjectInfo {
+export function getProjectMetadata(filepath: string): ProjectMetadata {
   const slug = filepath.replace(/\.mdx$/, '')
   const filePath = path.join(rootDirectory, filepath)
   const fileContent = fs.readFileSync(filePath, { encoding: 'utf8' })

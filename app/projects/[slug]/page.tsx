@@ -4,12 +4,7 @@ import Image from 'next/image'
 import { formatDate } from '@/lib/utils'
 import MDXContent from '@/components/mdx-content'
 import { ArrowLeftIcon } from '@radix-ui/react-icons'
-import {
-  getProjectBySlug,
-  getProjects,
-  ProjectMetadata,
-  ProjectImage
-} from '@/lib/projects'
+import { getProjectBySlug, getProjects, ProjectMetadata } from '@/lib/projects'
 import { notFound } from 'next/navigation'
 import Page from '@/components/ui/page'
 
@@ -34,11 +29,8 @@ export default async function Project({
 
   const { metadata, content } = project
 
-  const { title, imageData, author, image, publishedAt } =
-    metadata as ProjectMetadata & ProjectImage
-  const imageInfo = { ...imageData, src: image }
+  const { title, imageData, author, publishedAt } = metadata as ProjectMetadata
 
-  console.log(project)
   return (
     <Page>
       <Link
@@ -49,10 +41,10 @@ export default async function Project({
         <span>Back to projects</span>
       </Link>
 
-      {imageInfo.src && (
+      {imageData?.src && (
         <div className='h-w-full relative mb-6 h-96 overflow-hidden rounded-lg'>
           <Image
-            src={imageInfo?.src}
+            src={imageData?.src}
             alt={title || ''}
             className='!absolute !bottom-auto !right-auto !h-auto'
             fill

@@ -1,5 +1,5 @@
 import Projects from '@/components/projects'
-import { getProjects, ProjectMetadata, ProjectInfo } from '@/lib/projects'
+import { getProjects, ProjectMetadata } from '@/lib/projects'
 import Page from '@/components/ui/page'
 
 export default async function ProjectsPage() {
