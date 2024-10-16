@@ -36,8 +36,10 @@ export async function getProjectBySlug(slug: string): Promise<Project | null> {
     const filePath = path.join(rootDirectory, `${slug}.mdx`)
     const fileContent = fs.readFileSync(filePath, { encoding: 'utf8' })
     const { data, content } = matter(fileContent)
-    const imageData = getImageSize(data.image)
-    const thumbData = data.thumb !== undefined ? getImageSize(data.thumb) : null
+    const { image, thumb } = data
+
+    const imageData = getImageData(image)
+    const thumbData = getImageData(thumb)
     return { metadata: { ...data, slug, thumbData, imageData }, content }
   } catch (error) {
     return null
@@ -63,10 +65,19 @@ export async function getProjects(limit?: number): Promise<ProjectMetadata[]> {
 
   return projects
 }
-export function getImageSize(filepath: string): ProjectMetadata['imageData'] {
-  const imagePath = path.join(imageDirectory, filepath)
-  const dimensions = sizeOf(imagePath)
-  return dimensions
+
+export function getImageData(url: string): ProjectMetadata['imageData'] {
+  if (!url) return
+  const imagePath = path.join(imageDirectory, url)
+  const imageSize = sizeOf(imagePath)
+  return (
+    imageSize && {
+      src: url,
+      width: imageSize?.width,
+      height: imageSize?.height,
+      type: imageSize?.type
+    }
+  )
 }
 
 export function getProjectMetadata(filepath: string): ProjectMetadata {
@@ -75,20 +86,7 @@ export function getProjectMetadata(filepath: string): ProjectMetadata {
   const fileContent = fs.readFileSync(filePath, { encoding: 'utf8' })
   const { data } = matter(fileContent)
   const { image, thumb } = data
-  const imageSize = image && getImageSize(image)
-  const thumbSize = thumb && getImageSize(thumb)
-
-  const imageData = {
-    src: image,
-    width: imageSize?.width as number,
-    height: imageSize?.height,
-    type: imageSize?.type
-  }
-  const thumbData = {
-    src: thumb,
-    width: thumbSize?.width,
-    height: thumbSize?.height,
-    type: thumbSize?.type
-  }
+  const imageData = getImageData(image)
+  const thumbData = getImageData(thumb)
   return { ...data, slug, thumbData, imageData }
 }
