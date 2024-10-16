@@ -8,8 +8,11 @@ export default function Header() {
         <div>
           <h1>
             <Link href='/' className='font-serif text-3xl font-bold'>
-              MaryaH.
+              MaH.
             </Link>
+            <span className='block text-sm text-slate-400'>
+              Designer Heart. Developer Mind.
+            </span>
           </h1>
         </div>
 
