@@ -138,7 +138,7 @@ export default function ContactForm() {
             <Button
               type='submit'
               disabled={isSubmitting}
-              className='w-full disabled:opacity-50'
+              className='w-full bg-primary disabled:opacity-50'
             >
               {isSubmitting ? 'Submitting...' : 'Contact Us'}
             </Button>

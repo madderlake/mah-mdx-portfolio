@@ -21,7 +21,7 @@ export default function Intro() {
       </div>
       <div className='relative'>
         <Image
-          className='flex-1 rounded-lg grayscale'
+          className='flex-1 rounded-lg grayscale hover:filter-none'
           src={authorImage}
           alt='Mary A. Hayne'
           width={imageData ? imageData?.width * 0.8 : undefined}

@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 
-import { ProjectMetadata } from '@/lib/projects'
+import type { ProjectMetadata } from '@/lib/projects'
 import { formatDate } from '@/lib/utils'
 
 export default function Projects({
@@ -11,17 +11,17 @@ export default function Projects({
 }) {
   return (
     <ul className='grid grid-cols-1 gap-8 sm:grid-cols-2'>
-      {projects.map(project => {
-        const { image, thumb, slug, title, imageData, thumbData } = project
+      {projects.map((project: ProjectMetadata) => {
+        const { slug, title, imageData, thumbData } = project
 
         return (
           <li key={slug} className='group relative'>
             <Link href={`/projects/${slug}`}>
-              {project.image && (
+              {imageData?.src && (
                 <div className='h-72 bg-muted sm:h-72'>
                   <div className='h-full w-full overflow-clip rounded-md'>
                     <Image
-                      src={thumb ?? (image as string)}
+                      src={thumbData?.src ? thumbData?.src : imageData?.src}
                       alt={title || ''}
                       fill
                       className='rounded-md object-cover object-top grayscale transition-transform duration-500 group-hover:scale-105 group-hover:grayscale-0'
