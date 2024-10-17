@@ -46,7 +46,7 @@ export default async function Project({
           <Image
             src={imageData?.src}
             alt={title || ''}
-            className='!bottom-auto !right-auto !w-auto sm:!h-auto'
+            className='!bottom-auto !right-auto sm:!h-auto sm:!w-auto'
             fill
             priority
           />

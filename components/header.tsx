@@ -11,7 +11,7 @@ export default function Header() {
         <div className='border-b border-dotted border-red-400 text-center sm:text-left'>
           <h1 className='pb-2'>
             <Link href='/' className='font-serif text-3xl font-bold'>
-              MaryaH.
+              &lt; MaryaH /&gt;
             </Link>
             <span className='mt-2 block text-sm text-slate-400'>
               DESIGNER HEART<span className='text-lg text-red-500'> ♥️ </span>
