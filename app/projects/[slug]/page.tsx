@@ -42,11 +42,11 @@ export default async function Project({
       </Link>
 
       {imageData?.src && (
-        <div className='h-w-full relative mb-6 h-96 overflow-hidden rounded-lg'>
+        <div className='h-w-full relative mb-6 h-60 overflow-hidden rounded-lg sm:h-96'>
           <Image
             src={imageData?.src}
             alt={title || ''}
-            className='!absolute !bottom-auto !right-auto !h-auto'
+            className='!bottom-auto !right-auto !w-auto sm:!h-auto'
             fill
             priority
           />
