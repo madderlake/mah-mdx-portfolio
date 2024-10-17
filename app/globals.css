@@ -119,10 +119,9 @@
     left: 0;
     width: 100%;
     height: 100%;
-    opacity: 0.375;
+    opacity: 0.45;
     z-index: -1;
-    background: url('/images/leaf-background.png');
+    background: url('/images/leaf-background-800.png');
     background-size: contain;
-    filter: grayscale();
   }
 }
