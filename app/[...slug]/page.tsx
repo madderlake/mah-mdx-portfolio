@@ -1,11 +1,6 @@
 import Page from '@/components/ui/page'
 import MDXContent from '@/components/mdx-content'
-import {
-  getPageBySlug,
-  PageMetadata,
-  PageData,
-  PageHeaderImage
-} from '@/lib/pages'
+import { getPageBySlug, PageMetadata, PageData } from '@/lib/pages'
 import notFound from '../not-found'
 import Image from 'next/image'
 
@@ -22,15 +17,14 @@ export default async function PageContent({
   }
 
   const { metadata, content } = page
-  const { imageData, image, title } = metadata as PageMetadata & PageHeaderImage
+  const { imageData, title } = metadata as PageMetadata
 
-  const imageInfo = { ...imageData, src: image }
   return (
     <Page>
       {imageData && (
         <div className='h-w-full relative mb-6 h-96 overflow-hidden rounded-lg'>
           <Image
-            src={imageInfo?.src}
+            src={imageData?.src}
             alt={title || ''}
             className='!absolute !bottom-auto !right-auto !h-auto'
             fill
