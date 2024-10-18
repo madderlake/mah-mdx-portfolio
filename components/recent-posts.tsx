@@ -1,9 +1,11 @@
 import Link from 'next/link'
-import { getPosts } from '@/lib/posts'
+import { getItemsOfType, ItemType } from '@/lib/content-type'
 import Posts from '@/components/posts'
 
+const type: ItemType = 'posts'
+
 export default async function RecentPosts() {
-  const posts = await getPosts(4)
+  const posts = await getItemsOfType(type, 4)
 
   return (
     <section className='pb-24'>

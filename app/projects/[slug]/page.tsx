@@ -1,15 +1,20 @@
 import Link from 'next/link'
 import Image from 'next/image'
-
 import { formatDate } from '@/lib/utils'
 import MDXContent from '@/components/mdx-content'
 import { ArrowLeftIcon } from '@radix-ui/react-icons'
-import { getProjectBySlug, getProjects, ProjectMetadata } from '@/lib/projects'
 import { notFound } from 'next/navigation'
 import Page from '@/components/ui/page'
-
+// import { getItemBySlug, getItems, ItemMetadata } from '@/lib/projects'
+import {
+  ItemType,
+  getItemsOfType,
+  getItemBySlug,
+  ItemMetadata
+} from '@/lib/content-type'
+const type: ItemType = 'projects'
 export async function generateStaticParams() {
-  const projects = await getProjects()
+  const projects = await getItemsOfType(type)
   const slugs = projects.map(project => ({ slug: project.slug }))
 
   return slugs
@@ -21,7 +26,8 @@ export default async function Project({
   params: { slug: string }
 }) {
   const { slug } = params
-  const project = await getProjectBySlug(slug)
+
+  const project = await getItemBySlug(type, slug)
 
   if (!project) {
     notFound()
@@ -29,7 +35,7 @@ export default async function Project({
 
   const { metadata, content } = project
 
-  const { title, imageData, author, publishedAt } = metadata as ProjectMetadata
+  const { title, imageData, author, publishedAt } = metadata as ItemMetadata
 
   return (
     <Page>

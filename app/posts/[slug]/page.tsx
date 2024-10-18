@@ -3,13 +3,15 @@ import Image from 'next/image'
 import Page from '@/components/ui/page'
 import { formatDate } from '@/lib/utils'
 import MDXContent from '@/components/mdx-content'
-import { getPosts, getPostBySlug } from '@/lib/posts'
+import { getItemsOfType, getItemBySlug, ItemType } from '@/lib/content-type'
 import { ArrowLeftIcon } from '@radix-ui/react-icons'
 import { notFound } from 'next/navigation'
 // import NewsletterForm from '@/components/newsletter-form'
 
+const type: ItemType = 'posts'
+
 export async function generateStaticParams() {
-  const posts = await getPosts()
+  const posts = await getItemsOfType(type)
   const slugs = posts.map(post => ({ slug: post.slug }))
 
   return slugs
@@ -17,14 +19,14 @@ export async function generateStaticParams() {
 
 export default async function Post({ params }: { params: { slug: string } }) {
   const { slug } = params
-  const post = await getPostBySlug(slug)
+  const post = await getItemBySlug(type, slug)
 
   if (!post) {
     notFound()
   }
 
   const { metadata, content } = post
-  const { title, image, author, publishedAt } = metadata
+  const { title, imageData, author, publishedAt } = metadata
 
   return (
     <Page>
@@ -36,10 +38,10 @@ export default async function Post({ params }: { params: { slug: string } }) {
         <span>Back to posts</span>
       </Link>
 
-      {image && (
+      {imageData?.src && (
         <div className='relative mb-6 h-96 w-full overflow-hidden rounded-lg'>
           <Image
-            src={image}
+            src={imageData.src}
             alt={title || ''}
             className='absolute bottom-auto right-auto h-auto'
             fill

@@ -1,9 +1,9 @@
 import Link from 'next/link'
 
-import type { PostMetadata } from '@/lib/posts'
+import type { ItemMetadata } from '@/lib/content-type'
 import { formatDate } from '@/lib/utils'
 
-export default function Posts({ posts }: { posts: PostMetadata[] }) {
+export default function Posts({ posts }: { posts: ItemMetadata[] }) {
   return (
     <ul className='flex flex-col gap-8'>
       {posts.map(post => (

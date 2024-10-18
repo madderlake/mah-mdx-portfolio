@@ -1,9 +1,15 @@
 import Projects from '@/components/projects'
-import { getProjects, ProjectMetadata } from '@/lib/projects'
+import { ItemMetadata, getItemsOfType, ItemType } from '@/lib/content-type'
 import Page from '@/components/ui/page'
+import { notFound } from 'next/navigation'
 
 export default async function ProjectsPage() {
-  const projects: ProjectMetadata[] = await getProjects()
+  const type: ItemType = 'projects'
+
+  if (!type) {
+    return notFound()
+  }
+  const projects: ItemMetadata[] = await getItemsOfType(type)
 
   return (
     <Page>

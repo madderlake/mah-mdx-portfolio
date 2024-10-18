@@ -1,8 +1,10 @@
 import Page from '@/components/ui/page'
 import MDXContent from '@/components/mdx-content'
-import { getPageBySlug, PageMetadata, PageData } from '@/lib/pages'
+import { getItemBySlug, ItemType, Item, ItemMetadata } from '@/lib/content-type'
 import notFound from '../not-found'
 import Image from 'next/image'
+
+const type: ItemType = 'pages'
 
 export default async function PageContent({
   params
@@ -10,18 +12,18 @@ export default async function PageContent({
   params: { slug: string }
 }) {
   const { slug } = params
-  const page: PageData | null = await getPageBySlug(slug)
+  const page: Item | null = await getItemBySlug(type, slug)
 
   if (!page) {
     return notFound()
   }
 
   const { metadata, content } = page
-  const { imageData, title } = metadata as PageMetadata
+  const { imageData, title } = metadata as ItemMetadata
 
   return (
     <Page>
-      {imageData && (
+      {imageData?.src && (
         <div className='h-w-full relative mb-6 h-96 overflow-hidden rounded-lg'>
           <Image
             src={imageData?.src}
