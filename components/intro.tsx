@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import { getImageData } from '@/lib/projects'
+import { getImageData } from '@/lib/content-type'
 
 export default function Intro() {
   const authorImage = '/images/authors/maryahayne-sq.jpg'

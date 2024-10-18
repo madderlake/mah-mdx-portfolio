@@ -1,14 +1,14 @@
 'use client'
 
 import { useState } from 'react'
-import { PostMetadata } from '@/lib/posts'
+import { ItemMetadata } from '@/lib/content-type'
 
 import Posts from '@/components/posts'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import { Cross2Icon } from '@radix-ui/react-icons'
 
-export default function PostsWithSearch({ posts }: { posts: PostMetadata[] }) {
+export default function PostsWithSearch({ posts }: { posts: ItemMetadata[] }) {
   const [query, setQuery] = useState('')
   const filtered = posts.filter(post =>
     post.title?.toLowerCase().includes(query.toLowerCase())

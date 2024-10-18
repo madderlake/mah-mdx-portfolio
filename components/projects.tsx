@@ -1,17 +1,13 @@
 import Image from 'next/image'
 import Link from 'next/link'
 
-import type { ProjectMetadata } from '@/lib/projects'
+import type { ItemMetadata } from '@/lib/content-type'
 import { formatDate } from '@/lib/utils'
 
-export default function Projects({
-  projects
-}: {
-  projects: ProjectMetadata[]
-}) {
+export default function Projects({ projects }: { projects: ItemMetadata[] }) {
   return (
     <ul className='grid grid-cols-1 gap-8 sm:grid-cols-2'>
-      {projects.map((project: ProjectMetadata) => {
+      {projects.map((project: ItemMetadata) => {
         const { slug, title, imageData, thumbData } = project
 
         return (

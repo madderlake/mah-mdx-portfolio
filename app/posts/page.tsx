@@ -1,8 +1,15 @@
-import { getPosts } from '@/lib/posts'
+import { getItemsOfType, ItemType } from '@/lib/content-type'
 import PostsWithSearch from '@/components/posts-with-search'
 import Page from '@/components/ui/page'
+import { notFound } from 'next/navigation'
+
 export default async function PostsPage() {
-  const posts = await getPosts()
+  const type: ItemType = 'posts'
+
+  if (!type) {
+    return notFound()
+  }
+  const posts = type && (await getItemsOfType(type))
 
   return (
     <Page>
