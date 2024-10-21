@@ -16,7 +16,6 @@ const type: ItemType = 'projects'
 export async function generateStaticParams() {
   const projects = await getItemsOfType(type)
   const slugs = projects.map(project => ({ slug: project.slug }))
-
   return slugs
 }
 
@@ -52,7 +51,7 @@ export default async function Project({
           <Image
             src={imageData?.src}
             alt={title || ''}
-            className='!bottom-auto !right-auto sm:!h-auto sm:!w-auto'
+            className='!bottom-auto !right-auto sm:!h-auto'
             fill
             priority
           />

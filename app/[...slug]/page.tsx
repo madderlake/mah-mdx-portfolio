@@ -28,8 +28,8 @@ export default async function PageContent({
           <Image
             src={imageData?.src}
             alt={title || ''}
-            className='!absolute !bottom-auto !right-auto !h-auto'
-            fill
+            width={imageData?.width}
+            height={imageData?.height}
             priority
           />
         </div>
