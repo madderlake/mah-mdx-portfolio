@@ -5,7 +5,6 @@ import MDXContent from '@/components/mdx-content'
 import { ArrowLeftIcon } from '@radix-ui/react-icons'
 import { notFound } from 'next/navigation'
 import Page from '@/components/ui/page'
-// import { getItemBySlug, getItems, ItemMetadata } from '@/lib/projects'
 import {
   ItemType,
   getItemsOfType,
@@ -33,7 +32,6 @@ export default async function Project({
   }
 
   const { metadata, content } = project
-
   const { title, imageData, author, publishedAt } = metadata as ItemMetadata
 
   return (
