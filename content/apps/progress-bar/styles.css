@@ -1,0 +1,18 @@
+.progress {
+  height: 1.5em;
+  width: 100%;
+  background-color: #c9c9c9;
+  border-radius: 10px;
+}
+
+.progress .value {
+  background-color: dodgerblue;
+  font-size: 0.875em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  margin-right: 5px;
+  height: 100%;
+  border-radius: 10px;
+}
