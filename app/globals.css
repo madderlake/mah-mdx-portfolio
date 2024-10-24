@@ -4,8 +4,9 @@
 
 @layer base {
   :root {
+    --brand: 338, 85%, 42.5%;
     --background: 0 0% 100%;
-    --foreground: 240 10% 3.9%;
+    /* --foreground: 240 10% 3.9%; */
     --foreground: 338, 85%, 42.5%;
     --card: 0 0% 100%;
     --card-foreground: 240 10% 3.9%;
@@ -55,7 +56,8 @@
     --secondary: 240 3.7% 15.9%;
     --secondary-foreground: 0 0% 98%;
     --muted: 240 3.7% 15.9%;
-    --muted-foreground: 240 5% 64.9%;
+    /* --muted-foreground: 240 5% 64.9%; */
+    --muted-foreground: 0 0% 100%;
     --accent: 240 3.7% 15.9%;
     --accent-foreground: 0 0% 98%;
     --destructive: 0 62.8% 30.6%;
@@ -123,5 +125,12 @@
     z-index: -1;
     background: url('/images/leaf-background-800.png');
     background-size: contain;
+  }
+  .dark .bg-white\/75 {
+    background-color: hsl(var(--background) / 0.75);
+    color: var(--foreground);
+  }
+  .dark .brand {
+    color: hsl(var(--brand));
   }
 }
