@@ -4,6 +4,7 @@ import { MDXRemote, MDXRemoteProps } from 'next-mdx-remote/rsc'
 import Image, { ImageProps } from 'next/image'
 import sizeOf from 'image-size'
 import Counter from '@/components/counter'
+import ProgressBarApp from '@/content/apps/progress-bar'
 import path from 'path'
 
 // Custom component to handle code highlighting
@@ -29,11 +30,13 @@ const MarkdownImage = ({ src, alt }: ImageProps) => {
   )
 }
 
+const ProgressBar = (props: any) => <ProgressBarApp />
 // Define custom components to override default markdown rendering
 const components = {
   code: Code,
   img: (props: any) => <MarkdownImage {...props} />,
-  Counter
+  Counter,
+  ProgressBar
 }
 
 export default function MDXContent(
