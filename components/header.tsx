@@ -8,8 +8,8 @@ export default function Header() {
         <ThemeToggle />
       </div>
       <nav className='container max-w-4xl items-center justify-between sm:flex'>
-        <div className='border-b border-dotted border-red-400 text-center sm:text-left'>
-          <h1 className='pb-2'>
+        <div className='border-b border-dotted border-red-500 text-center sm:text-left'>
+          <h1 className='brand pb-2'>
             <Link href='/' className='font-serif text-3xl font-bold'>
               &lt; MaryaH /&gt;
             </Link>
@@ -22,10 +22,10 @@ export default function Header() {
         <div className='flex-col justify-center py-5'>
           <ul className='flex items-center justify-center gap-12 text-sm font-light text-muted-foreground sm:py-0'>
             <li className='transition-colors hover:text-foreground'>
-              <Link href='/posts'>Posts</Link>
+              <Link href='/projects'>Projects</Link>
             </li>
             <li className='transition-colors hover:text-foreground'>
-              <Link href='/projects'>Projects</Link>
+              <Link href='/posts'>Posts</Link>
             </li>
             <li className='transition-colors hover:text-foreground'>
               <Link href='/about'>About</Link>

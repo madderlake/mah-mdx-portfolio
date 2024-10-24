@@ -4,8 +4,8 @@ export default function Page({
   children: React.ReactNode
 }>) {
   return (
-    <section className='pb-24 pt-36 sm:p-32'>
-      <div className='container mt-0 max-w-4xl bg-white/75 py-20 shadow-md'>
+    <section className='pb-24 pt-36 sm:mt-20 sm:p-32'>
+      <div className='container mt-0 max-w-4xl bg-white/75 py-16 shadow-md'>
         {children}
       </div>
     </section>
