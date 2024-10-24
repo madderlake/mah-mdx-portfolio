@@ -39,7 +39,7 @@ export default async function Post({ params }: { params: { slug: string } }) {
       </Link>
 
       {imageData?.src && (
-        <div className='relative mb-6 h-96 w-full overflow-hidden rounded-lg'>
+        <div className='relative mb-6 w-full overflow-hidden rounded-lg sm:h-96'>
           <Image
             src={imageData.src}
             alt={title || ''}
