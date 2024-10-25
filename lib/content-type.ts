@@ -30,6 +30,7 @@ export type ItemMetadata = {
   author?: string
   publishedAt?: string
   slug: string
+  status: 'publish' | 'private'
 }
 
 export async function getItemBySlug(
@@ -41,11 +42,14 @@ export async function getItemBySlug(
     const filePath = path.join(itemTypeDirectory, `${slug}.mdx`)
     const fileContent = fs.readFileSync(filePath, { encoding: 'utf8' })
     const { data, content } = matter(fileContent)
-    const { image, thumb } = data
+    const { image, thumb, status } = data
 
     const imageData = image && getImageData(image)
     const thumbData = thumb && getImageData(thumb)
-    return { metadata: { ...data, slug, thumbData, imageData }, content }
+    return {
+      metadata: { ...data, slug, status, thumbData, imageData },
+      content
+    }
   } catch (error) {
     return null
   }
@@ -60,6 +64,7 @@ export async function getItemsOfType(
   const files = fs.readdirSync(itemTypeDirectory)
   const items = files
     .map(file => getItemMetadata(type, file))
+    .filter(file => file.status === 'publish')
     .sort((a, b) => {
       if (new Date(a?.publishedAt ?? '') < new Date(b?.publishedAt ?? '')) {
         return 1
@@ -98,8 +103,8 @@ export function getItemMetadata(
   const filePath = path.join(itemTypeDirectory, filepath)
   const fileContent = fs.readFileSync(filePath, { encoding: 'utf8' })
   const { data } = matter(fileContent)
-  const { image, thumb } = data
+  const { image, thumb, status } = data
   const imageData = getImageData(image)
   const thumbData = getImageData(thumb)
-  return { ...data, slug, thumbData, imageData }
+  return { ...data, status, slug, thumbData, imageData }
 }
