@@ -24,7 +24,7 @@ export default async function PageContent({
   return (
     <Page>
       {imageData?.src && (
-        <div className='h-w-full relative mb-6 h-96 overflow-hidden rounded-lg'>
+        <div className='h-w-full relative mb-6 overflow-hidden rounded-lg sm:h-96'>
           <Image
             src={imageData?.src}
             alt={title || ''}
