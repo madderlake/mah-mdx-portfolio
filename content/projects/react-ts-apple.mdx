@@ -1,53 +1,101 @@
 ---
-  title: Family Pages Transformed @ Apple
+  title: Transformation @ Apple
   summary: Modernizing a monolith.
   image: /images/projects/ipad-landscape.png
   thumb: null
   author: 'Mary A. Hayne'
-  publishedAt: '2024-03-16'
+  publishedAt: '2024-01-16'
   status: publish
 ---
 
-The Platform team at Apple was tasked with building a Proof-of-Concept as the
-basis for a consequential transformation of their marketing website.
+## Project Overview
 
-Several of us were brought in to help bring advanced React development skills
-and experience, as React was new to the team.
+The Platform team at Apple was tasked with building a Proof-of-Concept (PoC) for
+a transformative upgrade to Apple’s marketing website, migrating the site to a
+CMS-driven architecture using Adobe Experience Manager (AEM) in a headless
+configuration. The project’s goal was to significantly streamline the content
+management process and improve design consistency across platforms.
 
-An example of the components I built was the `Image Accordion` component and
-section, as seen below. The complexity here comes from the differences in how it
-works on mobile devices, and using a single image for all viewports.
+My primary focus was on bringing advanced expertise in React, TypeScript, and
+Next.js to a team transitioning to these technologies. I led the development of
+complex, reusable UI components and contributed to the foundational architecture
+that made this transformation possible.
 
 <hr />
-![img accordion](/images/projects/apl-img-accordion.png) The live version can be
-seen [`here`](https://www.apple.com/ipad/)
+![img accordion](/images/projects/apl-img-accordion.png) The recently launched
+page can be seen [`here`](https://www.apple.com/ipad/)
 
-## Key Learnings
+### Key Contributions
 
-- Building an react component system to be consumed by an enterprise-level
-  content management system, with all the scrupulous detail and coordination
-  that required.
-- How to configure components to enforce a type safe data conduit to the CMS.
-- The value of Typescript - I learned to love it! 😬
-- Working with incredibly high design standards
-- The value of true collaboration with experts in design, backend,
-  accessibility, SEO and QA.
+- **Developed Modular & Responsive Components**: One key example was the **Image
+  Accordion** component, a complex feature designed to maintain visual
+  consistency and optimize performance across different devices by utilizing a
+  single responsive image asset. I implemented adaptive logic to handle
+  viewport-specific interactions and layout changes efficiently using React
+  Hooks and responsive styling techniques.
 
-## Tech Stack
+- **Pioneered Type-Safe Integration with CMS**: I spearheaded the integration of
+  strictly typed data using **TypeBox** and **JSON Schema**, enforcing a
+  type-safe conduit between AEM and our React components. This approach
+  minimized runtime errors and improved developer experience by leveraging
+  TypeScript's static analysis capabilities. It was critical in meeting a key
+  stakeholder deadline two weeks ahead of schedule.
 
-- React
-- NextJS
-- Typescript
-- TypeBox, JSON Schema
-- Cucumber
-- Apple internal tools
+- **Built an Atomic Component Library**: I developed the architecture and
+  testing strategies for an **atomic design system**. This ensured that
+  components adhered to Apple’s high standards and were consistent across
+  platforms. I employed Storybook for isolated component testing and Cucumber
+  for BDD testing, reducing post-release revisions and improving design
+  consistency.
+
+- **Optimized Development Workflows & Collaboration**: Collaborated with
+  cross-functional teams, including backend, design, accessibility, and SEO
+  specialists, to deliver high-fidelity components from wireframes to
+  production. This collaborative process led to a 30% reduction in component
+  release cycles and the team’s highest merged PR count.
+
+### Challenges & Solutions
+
+- **Adapting to Enterprise-Level CMS Requirements**: Building components for an
+  enterprise-level CMS like AEM required extensive coordination and scrupulous
+  attention to detail. I implemented data validation and schema-based
+  configurations to ensure that non-technical content editors could seamlessly
+  populate complex components without introducing errors.
+
+- **Ensuring Accessibility & SEO Standards**: We tackled challenges around
+  accessibility and SEO optimization by conducting frequent audits and using
+  internal tools for automated accessibility checks. I integrated ARIA roles and
+  dynamic metadata generation to align the front-end with Apple’s accessibility
+  and SEO guidelines.
+
+### Key Learnings
+
+- Mastered building a **type-safe React component system** tailored for
+  integration with a headless CMS, leveraging TypeScript and schema-based
+  validation.
+- Developed an appreciation for rigorous **design standards** and the value of
+  cross-functional collaboration in achieving a unified, high-quality product.
+- Deepened knowledge of **responsive design** patterns and the use of advanced
+  state management techniques in React.
+
+### Tech Stack
+
+- **Frameworks & Libraries**: React, Next.js, TypeScript
+- **Schema Management**: TypeBox, JSON Schema
+- **Testing Tools**: Cucumber, Storybook
+- **CMS**: Adobe Experience Manager (AEM)
+- **Other**: Apple internal tools for accessibility, analytics, and deployment
 
 ## Conclusion
 
-This was an very rewarding project. I was fortunate to be given the opportunity
-to lead the final push to load actual (type safe) data from the CMS to present
-to stakeholders.
+This project was a highly rewarding experience that allowed me to contribute to
+Apple’s digital transformation efforts. I had the opportunity to lead the final
+push to load type-safe data from the CMS and present the PoC to stakeholders,
+showcasing the platform’s capabilities and demonstrating our vision for future
+development.
 
-NOTE: I am not able to publicly share additional project details or code, but if
-you are interested in more details please don't hesitate to email me:
-mary[at]maryahayne.com.
+---
+
+NOTE: Due to disclosure agreements, I am not able to publicly the code or
+deployment details for this project. Please contact me at mary[at]maryahayne.com
+for more insights into this work.

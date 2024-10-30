@@ -1,82 +1,92 @@
 ---
-  title: A Headless WordPress theme
+  title: Headless NextJS + WordPress Theme
   summary: A minimal theme with pages and ACF.
   image: /images/projects/wordpress-headless2.webp
 #   thumb: /images/projects/thumbs/cstudio-home-video.jpg
   author: Mary A. Hayne
-  publishedAt: 2024-09-06
+  publishedAt: 2024-08-06
   status: publish
 ---
 
-Headless WordPress / NextJS Theme I have been a fan of the headless CMS since it
-first became a "thing", and built a headless theme years ago with Express
-Server. That theme enabled custom page templates and I wanted to replicate that
-functionality.
+## Headless WordPress with ACF
 
-On countless WordPress sites, I have managed and updated an exploding number of
-plugins, themes, and files, ever watchful for potential security
-vulnerabilities. Older sites can be challenging to update and maintain.
+This project is a fully customizable, headless WordPress theme built with
+**React**, **Next.js**, and **GraphQL**. As a long-time fan of headless CMS
+architecture, I wanted to build a theme that takes full advantage of WordPress’s
+powerful content management features without the traditional often-fraught PHP
+front-end layer.
 
-WordPress has always been a platform to me, probably because I have used it
-predominantly for sites rather than for blogging. Without using the
-functionality that delivers the user interface to the browser (and all the
-security risks therein), what remains a lean, mean content-entry and delivery
-machine, with unmatched flexibility.
+The motivation behind this project was twofold:
 
-All coincides with the burgeoning popularity of libraries like React and
-statically generated sites, not to mention the increasing need for optimization,
-performance, and security.
+1. to deliver a lean, secure, and flexible content-entry platform that leverages
+   modern JavaScript frameworks like React, as well as the stellar optimization
+   caching options of the latest NextJS release, thereby reducing the security
+   risks and performance issues traditionally associated with WordPress.
 
-> Learn Javascript deeply.
->
-> <cite> — Matt Mullenweg, Creator of WordPress</cite>
+2. Integrate ACF Flexible content templates, at the request of a client who
+   wanted to retain them after the development resources he had invested in
+   them.
 
-This project is built on WordPress with React, NextJS, Typescript, and GraphQL.
-Local development was set up with Docker and the front end was bootstrapped with
-create-next-app.
+### Key Features & Contributions
 
-### My Requirements
+- **Dynamic ACF Integration & Page Templates**: Leveraged **Advanced Custom
+  Fields (ACF)** to create flexible content templates. I integrated a variety of
+  modular layouts, including sections, tabs, columns, and cards. This allows
+  content editors to build and customize pages dynamically without touching the
+  codebase. The ACF templates were designed to support the flexibility and
+  adaptability required for building a variety of page structures.
 
-- Built it from scratch
+- **Next.js 14 with App Router & Server Components**: Embraced new Next.js 14
+  features such as the `app router` and **server components**, improving routing
+  and optimizing server-rendered data fetching. I tackled challenges around
+  nested data fetching in statically generated pages using Next.js’s
+  `dynamic = 'force-dynamic'` setting to ensure smooth dynamic content
+  rendering.
 
-- Keep it boilerplate - minimal styles - customizable
+- **TailwindCSS**: To enhance maintainability and flexibility, I adopted
+  **TailwindCSS**, taking a deep divethe first time. This utility-first CSS
+  framework enabled me to keep styles minimal and customizable, boilerplate if
+  you will, ensuring that the theme remains lightweight and easy to modify for
+  various projects.
 
-- Integrate Flexible content ACF page Templates
+- **Static Generation & Data Fetching with GraphQL**: Built out a robust content
+  delivery mechanism using **GraphQL** queries to fetch data from WordPress. The
+  frontend was bootstrapped with **create-next-app**, and static pages were
+  generated for improved performance and SEO. Responding to another client
+  request, I also implemented archive pages as regular `page` post types, to
+  enable introductory content above the `loop`.
 
-- TailwindCSS - utilize this utility-first style system for the first time
+- **Security & Local Development Setup with Docker**: Configured local
+  development using **Docker**, isolating WordPress, the database, and the
+  Node.js server in separate containers. This setup ensured consistency across
+  development environments and reduced the complexity of managing multiple local
+  dependencies.
 
-- Archive pages that allow page data
+### Challenges & Solutions
 
-### Process
+- **Handling Nested Data Fetching Issues**: Encountered errors during the
+  deployment/build process due to nested data fetching in statically generated
+  pages. By leveraging Next.js’s `dynamic = 'force-dynamic'` option, I
+  dynamically rendered pages that required nested data, eliminating server-side
+  build errors. Presto! It seems Next thinks of everything.
 
-I was excited to take a deep dive into the new features in NextJS 14, which
-introduces the `app router` and server component.
-
-[Post: Server Components 101](/posts/react-server-components)
-
-For the ACF page templates, I was able to leverage them from my old project,
-along with all the layouts - sections, tabs, columns, and cards.
-
-Leaving the posts page setting unset in WordPress, I created the Blog page with
-some introductory content. Then, inside the Blog page template, I fetched the
-posts. I had done this in WordPress in PHP by implementing the `WP_Loop` after
-the page content. Unfortunately, in Next this generated 500 errors on
-deploy/build/serve. I believe this was caused by the nested data fetching
-occuring on a page earmarked to be statically rendered. This was solved by using
-Next's `const dyamic = 'force-dynamic'` setting.
+- **Customizing TailwindCSS for Generated Content**: Utilized the
+  `@tailwindcss/typography` plugin to automatically style generated content like
+  blog posts. This approach allowed me to maintain a consistent look and feel
+  across dynamically generated pages without extensive custom CSS.
 
 ### Tech Stack
 
-- **WordPress**
-- **Docker** - for local development
-- **NextJS** v14+
-- **Typescript**
-- **GraphQL**
-- **TailwindCSS**
-- `@tailwindcss/typography` - adds styles for generated content
-- `image-size` - gets image sizes from files
+- **WordPress**: Headless CMS
+- **Next.js 14+**: React-based framework with App Router & Server Components
+- **TypeScript**: For strict typing and enhanced developer experience
+- **GraphQL**: For efficient and flexible data querying
+- **TailwindCSS**: Utility-first CSS framework
+- **Docker**: For consistent and isolated local development environments
+- `@tailwindcss/typography`: Adds typographic styles for generated content
+- `image-size`: Retrieves image sizes from files to improve loading strategies
 
 ### Repository & Further Detail
 
-You can see how I solved these issues in the
-[Github repo](https://github.com/madderlake/maryah-headless-wordpress)
+You can explore the codebase and how I solved specific challenges in the
+[GitHub repo](https://github.com/madderlake/maryah-headless-wordpress).
