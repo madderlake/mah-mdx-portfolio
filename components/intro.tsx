@@ -10,12 +10,18 @@ export default function Intro() {
       <div className='mt-2 flex-1 text-center sm:mt-0 sm:text-left'>
         <h2 className='title no-underline'>Hello!</h2>
         <p className='mt-3 font-light text-muted-foreground'>
-          I&#39;m a frontend engineer and ux designer based in San Francisco,
-          CA. I&#39;m passionate about learning new technologies that make the
-          user experience beautiful, accessible, and performant.
+          I&#39;m a designer and frontend engineer based in San Francisco,
+          CA.,over a decade of experience using modern technologies to make
+          sites and applications beautiful, accessible, and performant.
+        </p>
+
+        <p className='mt-3 font-light text-muted-foreground'>
+          I&#39;m currently focused on projects using React, NextJS 14+, Node,
+          PHP, and WordPress, as well as other headless CMS implementations
+          (Shopify, Payload, Prisma, et al).
         </p>
       </div>
-      <div className='relative w-48 self-center pt-8 sm:self-end'>
+      <div className='relative w-48 items-center pt-8'>
         <Image
           className='flex-1 rounded-lg grayscale hover:filter-none'
           src={authorImage}
